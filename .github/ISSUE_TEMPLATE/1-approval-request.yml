@@ -53,7 +53,7 @@ body:
     attributes:
       label: Screen size
       description: How many inches? 😉
-      placeholder: 15GB
+      placeholder: "17"
     validations:
       required: true
   - type: input
