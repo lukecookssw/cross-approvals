@@ -90,8 +90,8 @@ body:
     attributes:
       label: Local warranty?
       options:
-        - label: Yes
-        - label: No
+        - label: "Yes"
+        - label: "No"
     validations:
       required: true
   - type: checkboxes
@@ -99,7 +99,7 @@ body:
     attributes:
       label: Do you already have an SSW laptop?
       options:
-        - label: Yes
-        - label: No
+        - label: "Yes"
+        - label: "No"
     validations:
       required: true
