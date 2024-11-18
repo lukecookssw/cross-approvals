@@ -60,7 +60,7 @@ body:
     id: device-screentype
     attributes:
       label: Screen type
-      placeholder: 15GB
+      placeholder: 1080p
     validations:
       required: true
   - type: input
