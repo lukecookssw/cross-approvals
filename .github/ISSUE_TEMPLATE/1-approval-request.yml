@@ -61,7 +61,6 @@ body:
     id: device-screentype
     attributes:
       label: Screen type
-      description: 
       placeholder: 15
     validations:
       required: true
@@ -69,7 +68,6 @@ body:
     id: device-battery
     attributes:
       label: Battery life
-      description:
       placeholder: 6 hours
     validations:
       required: true
