@@ -38,7 +38,7 @@ body:
     attributes:
       label: RAM
       description: How many gigabytes of RAM?
-      placeholder: 128
+      placeholder: 128GB
     validations:
       required: true
   - type: input
@@ -46,7 +46,7 @@ body:
     attributes:
       label: Storage
       description: How many gigabytes of storage?
-      placeholder: 500
+      placeholder: 500GB
     validations:
       required: true
   - type: input
@@ -54,14 +54,14 @@ body:
     attributes:
       label: Screen size
       description: How many inches? 😉
-      placeholder: 15
+      placeholder: 15GB
     validations:
       required: true
   - type: input
     id: device-screentype
     attributes:
       label: Screen type
-      placeholder: 15
+      placeholder: 15GB
     validations:
       required: true
   - type: input
@@ -83,7 +83,7 @@ body:
     attributes:
       label: Total price (including GST).
       description:  Include all extras (e.g. dongles, adapters, etc.).
-      placeholder: 3000
+      placeholder: $3000
     validations:
       required: true
   - type: checkboxes
