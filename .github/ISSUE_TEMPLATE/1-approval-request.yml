@@ -7,8 +7,7 @@ assignees:
 body:
   - type: markdown
     attributes:
-      value: |
-        Tell us about your new toy!
+      value: "Tell us about your new toy!"
   - type: input
     id: device-brand
     attributes:
@@ -90,23 +89,17 @@ body:
     id: warranty
     attributes:
       label: Local warranty?
-      multiple: false
       options:
         - label: Yes
-          value: yes
         - label: No
-          value: no
     validations:
       required: true
   - type: checkboxes
     id: ssw-device
     attributes:
       label: Do you already have an SSW laptop?
-      multiple: false
       options:
         - label: Yes
-          value: yes
         - label: No
-          value: no
     validations:
       required: true
