@@ -1,0 +1,50 @@
+name: Create Branch and PR from Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create-branch-and-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Create new branch
+      run: |
+        ISSUE_NUMBER=${{ github.event.issue.number }}
+        ISSUE_TITLE=${{ github.event.issue.title }}
+        BRANCH_NAME="issue-${ISSUE_NUMBER}"
+        git checkout -b $BRANCH_NAME
+
+    - name: Create markdown file from issue
+      run: |
+        ISSUE_NUMBER=${{ github.event.issue.number }}
+        ISSUE_TITLE=${{ github.event.issue.title }}
+        ISSUE_BODY=${{ github.event.issue.body }}
+        echo "# $ISSUE_TITLE" > requests/request-${ISSUE_NUMBER}.md
+        echo "$ISSUE_BODY" >> requests/request-${ISSUE_NUMBER}.md
+        git add requests/request-${ISSUE_NUMBER}.md
+        git commit -m "Add request #${ISSUE_NUMBER} as markdown file"
+
+    - name: Push new branch
+      run: |
+        ISSUE_NUMBER=${{ github.event.issue.number }}
+        BRANCH_NAME="issue-${ISSUE_NUMBER}"
+        git push origin $BRANCH_NAME
+
+    - name: Create pull request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: $BRANCH_NAME
+        title: "Add issue #${{ github.event.issue.number }} as markdown file"
+        body: "This PR adds a markdown file for issue #${{ github.event.issue.number }}."
+        base: main
