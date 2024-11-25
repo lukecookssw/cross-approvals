@@ -53,7 +53,7 @@ jobs:
         echo "${ISSUE_BODY}" >> requests/request-${ISSUE_NUMBER}.md
         git add requests/request-${ISSUE_NUMBER}.md
         git commit -m "Add request #${ISSUE_NUMBER} as markdown file"
-        git push
+        git push --set-upstream origin $BRANCH_NAME
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3
