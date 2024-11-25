@@ -33,7 +33,7 @@ jobs:
         SANITIZED_TITLE=$(echo "${ISSUE_TITLE}" | tr -cd '[:alnum:]-' | tr '[:upper:]' '[:lower:]')
         BRANCH_NAME="issue-${ISSUE_NUMBER}-${SANITIZED_TITLE}"
         git checkout -b "$BRANCH_NAME"
-        echo "::set-output name=branch_name::$BRANCH_NAME"
+        echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
 
     - name: Create requests directory
       run: mkdir -p requests
@@ -50,14 +50,14 @@ jobs:
 
     - name: Push new branch
       run: |
-        BRANCH_NAME=${{ steps.create_branch.outputs.branch_name }}
+        BRANCH_NAME=${{ env.branch_name }}
         git push origin "$BRANCH_NAME"
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ steps.create_branch.outputs.branch_name }}
+        branch: ${{ env.branch_name }}
         title: "Add request #${{ github.event.issue.number }} as markdown file"
         body: "This PR adds a markdown file for request #${{ github.event.issue.number }}."
         base: main
