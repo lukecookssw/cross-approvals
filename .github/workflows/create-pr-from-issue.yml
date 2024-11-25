@@ -20,8 +20,8 @@ jobs:
     - name: Create new branch
       run: |
         ISSUE_NUMBER=${{ github.event.issue.number }}
-        ISSUE_TITLE=${{ github.event.issue.title }}
-        BRANCH_NAME="issue-${ISSUE_NUMBER}"
+        ISSUE_TITLE="issue-abc"
+        BRANCH_NAME="issue-abc"
         git checkout -b $BRANCH_NAME
 
     - name: Create markdown file from issue
