@@ -53,7 +53,7 @@ jobs:
         echo "env var: ${{env.branch_name}}"
         echo "# ${ISSUE_TITLE}" > requests/request-${ISSUE_NUMBER}.md
         echo "${ISSUE_BODY}" >> requests/request-${ISSUE_NUMBER}.md
-        git add requests/request-${ISSUE_NUMBER}.md
+        git add .
         git commit -m "Add request #${ISSUE_NUMBER} as markdown file"
         git push --set-upstream origin ${BRANCH_NAME}
 
