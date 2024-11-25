@@ -49,3 +49,12 @@ jobs:
         git add .
         git commit -m "Add request #${ISSUE_NUMBER} as markdown file"
         git push --set-upstream origin ${BRANCH_NAME}
+
+    - name: Create pull request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ env.branch_name }}
+        title: "Add request #${{ github.event.issue.number }} as markdown file"
+        body: "Salary sacrifice request #${{ github.event.issue.number }}."
+        base: main
