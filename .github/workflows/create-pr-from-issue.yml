@@ -59,8 +59,8 @@ jobs:
     - name: Push new branch
       run: |
         BRANCH_NAME=${{ env.branch_name }}
-        echo "Pushing branch $BRANCH_NAME"
-        git push origin "$BRANCH_NAME"
+        echo "Pushing branch ${BRANCH_NAME}"
+        git push origin "${BRANCH_NAME}"
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3
