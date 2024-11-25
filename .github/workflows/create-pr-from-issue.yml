@@ -21,7 +21,7 @@ jobs:
       run: |
         ISSUE_NUMBER=${{ github.event.issue.number }}
         ISSUE_TITLE=${{ github.event.issue.title }}
-        BRANCH_NAME="issue-${{ github.event.issue.number }}-$(echo ${{ github.event.issue.title }} | tr -cd '[:alnum:]-' | tr '[:upper:]' '[:lower:]')"
+        BRANCH_NAME="issue-${{ github.event.issue.number }}-$(echo '${{ github.event.issue.title }}' | tr -cd '[:alnum:]-' | tr '[:upper:]' '[:lower:]')"
         git checkout -b $BRANCH_NAME
 
     - name: Create markdown file from issue
