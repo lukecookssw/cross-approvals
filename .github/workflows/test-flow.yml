@@ -35,8 +35,10 @@ jobs:
 
     - name: Create markdown file from issue
       run: |
-        echo "Hello-world" > requests/request.md
-        echo "Test string please ignore" >> requests/request.md
+        FILE_TITLE = "request"
+        FILE_CONTENT = "Hello world. This is a test file."
+        echo "# ${FILE_TITLE}" > requests/${FILE_TITLE}.md
+        echo "${FILE_CONTENT}" >> requests/request.md
         git add .
         git commit -m "test commit"
         git push --set-upstream origin ${{env.branch_name}}
