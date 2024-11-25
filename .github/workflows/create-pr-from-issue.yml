@@ -2,7 +2,7 @@ name: Create Branch and PR from Issue
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited]
 
 env:
   branch_name: ""
@@ -17,11 +17,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
 
     - name: Configure Git user
       run: |

@@ -1,0 +1,42 @@
+name: Test flow
+
+on:
+  workflow_dispatch:
+
+env:
+  branch_name: ""
+
+permissions:
+  contents: write
+
+jobs:
+  create-branch-and-push-code:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Configure Git user
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+
+    - name: Create new branch
+      id: create_branch
+      run: |
+        BRANCH_NAME="test-branch"
+        git checkout -b "$BRANCH_NAME"
+        echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
+
+    - name: Verify branch context
+      run: |
+        echo "Current branch: $(git branch --show-current)"
+
+    - name: Create markdown file from issue
+      run: |
+        echo "Hello-world" > requests/request.md
+        echo "Test string please ignore" >> requests/request.md
+        git add .
+        git commit -m "test commit"
+        git push --set-upstream origin test-branch
