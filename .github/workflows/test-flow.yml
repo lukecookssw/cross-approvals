@@ -39,4 +39,4 @@ jobs:
         echo "Test string please ignore" >> requests/request.md
         git add .
         git commit -m "test commit"
-        git push --set-upstream origin test-branch
+        git push --set-upstream origin ${{env.branch_name}}
