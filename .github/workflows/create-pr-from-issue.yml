@@ -47,11 +47,13 @@ jobs:
         ISSUE_NUMBER=${{ github.event.issue.number }}
         ISSUE_TITLE="${{ github.event.issue.title }}"
         ISSUE_BODY="${{ github.event.issue.body }}"
-        echo "# ${ISSUE_TITLE}" > requests/request-test.md
-        echo "${ISSUE_BODY}" >> requests/request-test.md
-        git add .
+        
+        BRANCH_NAME="${{ env.branch_name }}"
+        echo "# ${ISSUE_TITLE}" > requests/request-${ISSUE_NUMBER}.md
+        echo "${ISSUE_BODY}" >> requests/request-${ISSUE_NUMBER}.md
+        git add requests/request-${ISSUE_NUMBER}.md
         git commit -m "Add request #${ISSUE_NUMBER} as markdown file"
-        git push origin ${{ env.branch_name }}
+        git push
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3
