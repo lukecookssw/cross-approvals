@@ -26,12 +26,14 @@ jobs:
         git config --global user.name "github-actions[bot]"
 
     - name: Create new branch
+      id: create_branch
       run: |
         ISSUE_NUMBER=${{ github.event.issue.number }}
         ISSUE_TITLE="${{ github.event.issue.title }}"
         SANITIZED_TITLE=$(echo "${ISSUE_TITLE}" | tr -cd '[:alnum:]-' | tr '[:upper:]' '[:lower:]')
         BRANCH_NAME="issue-${ISSUE_NUMBER}-${SANITIZED_TITLE}"
         git checkout -b "$BRANCH_NAME"
+        echo "::set-output name=branch_name::$BRANCH_NAME"
 
     - name: Create requests directory
       run: mkdir -p requests
@@ -59,7 +61,7 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ steps.create-branch-and-pr.outputs.BRANCH_NAME }}
+        branch: ${{ steps.create_branch.outputs.branch_name }}
         title: "Add request #${{ github.event.issue.number }} as markdown file"
         body: "This PR adds a markdown file for request #${{ github.event.issue.number }}."
         base: main
