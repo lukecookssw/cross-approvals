@@ -38,9 +38,6 @@ jobs:
         git checkout -b "$BRANCH_NAME"
         echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
 
-    - name: Create requests directory
-      run: mkdir -p requests
-
     - name: Create markdown file from issue
       run: |
         ISSUE_NUMBER=${{ github.event.issue.number }}
@@ -54,7 +51,7 @@ jobs:
     - name: Push new branch
       run: |
         BRANCH_NAME=${{ env.branch_name }}
-        git push origin "$BRANCH_NAME"
+        git push origin "${{ env.branch_name }}"
 
     - name: Create pull request
       uses: peter-evans/create-pull-request@v3
