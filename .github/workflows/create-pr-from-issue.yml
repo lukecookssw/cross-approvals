@@ -17,7 +17,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Configure Git user
       run: |
@@ -39,13 +39,11 @@ jobs:
         ISSUE_TITLE="${{ github.event.issue.title }}"
         ISSUE_BODY="${{ github.event.issue.body }}"
         BRANCH_NAME="${{ env.branch_name }}"
-        
         echo "# ${ISSUE_TITLE}" > requests/request-${ISSUE_NUMBER}.md
         echo "${ISSUE_BODY}" >> requests/request-${ISSUE_NUMBER}.md
-        
 
     - name: Create pull request
-      uses: peter-evans/create-pull-request@v3
+      uses: peter-evans/create-pull-request@v7
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ env.branch_name }}
