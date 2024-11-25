@@ -30,7 +30,6 @@ jobs:
         ISSUE_TITLE="${{ github.event.issue.title }}"
         SANITIZED_TITLE=$(echo "${ISSUE_TITLE}" | tr -cd '[:alnum:]-' | tr '[:upper:]' '[:lower:]')
         BRANCH_NAME="issue-${ISSUE_NUMBER}-${SANITIZED_TITLE}"
-        git checkout -b "$BRANCH_NAME"
         echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
 
     - name: Create markdown file from issue
@@ -39,9 +38,6 @@ jobs:
         ISSUE_TITLE="${{ github.event.issue.title }}"
         ISSUE_BODY="${{ github.event.issue.body }}"
         BRANCH_NAME="${{ env.branch_name }}"
-        
-        echo "Branch name: $BRANCH_NAME"
-        echo "env var: ${{env.branch_name}}"
         
         echo "# ${ISSUE_TITLE}" > requests/request-${ISSUE_NUMBER}.md
         echo "${ISSUE_BODY}" >> requests/request-${ISSUE_NUMBER}.md
